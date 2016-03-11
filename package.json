@@ -1,6 +1,6 @@
 {
   "name": "docker-ip",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Get docker ip",
   "main": "dist/index.js",
   "scripts": {
