@@ -16,7 +16,7 @@ describe('docker-ip', () => {
     });
 
     it('should return `false` for not "present" docker-machine', () => {
-      sinon.stub(ip, 'exec', () => '127');
+      sinon.stub(ip, 'exec', () => { throw new Error('test'); });
       expect(ip.present()).to.equal(false);
       ip.exec.restore();
     });
@@ -46,13 +46,19 @@ describe('docker-ip', () => {
       it('should get `default` ip without arguments', () => {
         ip();
         expect(ip.exec.firstCall.args[0]).to.equal('docker-machine ip default');
-        expect(ip.exec.firstCall.args[1]).to.deep.equal({ encoding: 'utf8' });
+        expect(ip.exec.firstCall.args[1]).to.deep.equal({
+          encoding: 'utf8',
+          stdio: []
+        });
       });
 
       it('should get `dev` ip', () => {
         ip('dev');
         expect(ip.exec.firstCall.args[0]).to.equal('docker-machine ip dev');
-        expect(ip.exec.firstCall.args[1]).to.deep.equal({ encoding: 'utf8' });
+        expect(ip.exec.firstCall.args[1]).to.deep.equal({
+          encoding: 'utf8',
+          stdio: []
+        });
       });
     });
 
@@ -101,13 +107,19 @@ describe('docker-ip', () => {
       it('should get `default` ip without arguments', () => {
         ip();
         expect(ip.exec.firstCall.args[0]).to.equal('docker-machine ip default');
-        expect(ip.exec.firstCall.args[1]).to.deep.equal({ encoding: 'utf8' });
+        expect(ip.exec.firstCall.args[1]).to.deep.equal({
+          encoding: 'utf8',
+          stdio: []
+        });
       });
 
       it('should get `dev` ip', () => {
         ip('dev');
         expect(ip.exec.firstCall.args[0]).to.equal('docker-machine ip dev');
-        expect(ip.exec.firstCall.args[1]).to.deep.equal({ encoding: 'utf8' });
+        expect(ip.exec.firstCall.args[1]).to.deep.equal({
+          encoding: 'utf8',
+          stdio: []
+        });
       });
     });
 
