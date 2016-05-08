@@ -9,16 +9,23 @@ const expect = chai.expect;
 
 describe('docker-ip', () => {
   describe('ip.present', () => {
-    it('should return `true` for "present" docker-machine', () => {
-      sinon.stub(ip, 'exec', () => 'test');
-      expect(ip.present()).to.equal(true);
+    afterEach(() => {
       ip.exec.restore();
+    });
+
+    it('should return `true` for running docker-machine', () => {
+      sinon.stub(ip, 'exec', () => 'Running');
+      expect(ip.present()).to.equal(true);
+    });
+
+    it('should return `false` for saved docker-machine', () => {
+      sinon.stub(ip, 'exec', () => 'Saved');
+      expect(ip.present()).to.equal(false);
     });
 
     it('should return `false` for not "present" docker-machine', () => {
       sinon.stub(ip, 'exec', () => { throw new Error('test'); });
       expect(ip.present()).to.equal(false);
-      ip.exec.restore();
     });
   });
 

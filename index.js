@@ -14,8 +14,10 @@ function ip(type = 'default') {
 }
 
 ip.present = () => {
+  let result;
+
   try {
-    ip.exec('docker-machine version && echo $?', {
+    result = ip.exec('docker-machine status', {
       encoding: 'utf8',
 
       // By default parent stderr is used, which is bad
@@ -25,7 +27,7 @@ ip.present = () => {
     return false;
   }
 
-  return true;
+  return result === 'Running';
 };
 
 ip.exec = exec;
