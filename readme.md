@@ -12,4 +12,4 @@ ip() // 192.168.99.100 a "default" one
 ip('dev') // a "dev" one
 ```
 
-In order to run tests you should have installed and running docker.
+In order to run tests you need to instal and run docker
